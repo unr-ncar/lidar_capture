@@ -1,4 +1,4 @@
-import axios from "axios";
+import { Viewer } from "resium"
 
 type FileItem = {
     uuid: string;
@@ -35,11 +35,6 @@ type Sensor = {
 
     created: string;
     last_updated: string;
-}
-
-type LidarSelectionProps = {
-    cross_street: string;
-    lidars: Array<Lidar>;
 }
 
 const sensors: Array<Sensor> = [
@@ -99,8 +94,27 @@ const sensors: Array<Sensor> = [
 
 export default function CapturePage() {
 
-    axios.get('http://134.197.75.31:32141/intersections')
 
+    return (
+        <div className='flex flex-col gap-4 xl:flex-row xl:h-full'>
+            <div className='bg-stone-600 h-[650px] w-full rounded-xl md:bg-rose-400 xl:bg-emerald-400 xl:h-full xl:w-2/5'>
+                <Viewer />
+            </div>
+            <div className=''>
+                <div className=''>
+                    <p className='text-xl font-semibold text-neutral-400 mb-2'>
+                        Selected Intersections
+                    </p>
+                    <div>
+                        <div className='bg-rose-400 w-3 h-3 flex place-content-center place-items-center rounded'>
+                            <div  className='bg-rose-500 w-3 h-3 animate-ping rounded' />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+/*
     return (
         <div className='flex flex-col gap-4 xl:flex-row xl:h-full'>
             <div className='bg-stone-600 h-[650px] w-full rounded-xl md:bg-rose-400 xl:bg-emerald-400 xl:h-full xl:w-2/5'>
@@ -113,7 +127,7 @@ export default function CapturePage() {
                     </p>
                     <div className='flex flex-col gap-4'>
                         {
-                            intersections.map((intersection: LidarSelectionProps) => {
+                            sensors.map((intersection: LidarSelectionProps) => {
                                 return (
                                     <div className='rounded'>
                                         <p className='font-semibold text-neutral-400 border-b-2 border-neutral-200'>
@@ -170,6 +184,6 @@ export default function CapturePage() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*/
     )
 }
