@@ -1,5 +1,8 @@
 import axios from "axios";
-import {CircleMarker, MapContainer, TileLayer} from 'react-leaflet'
+import {CircleMarker, MapContainer, ScaleControl, TileLayer, useMapEvent, ZoomControl} from 'react-leaflet'
+import RecordingStatus from "../components/RecordingStatus.tsx";
+import DeploymentItem from "../components/DeploymentItem.tsx";
+import {useEffect, useState} from "react";
 
 /*
 type FileItem = {
@@ -32,7 +35,7 @@ type Site = {
     primaryStreet: string;
 }
 
-const sites: Array<Site> = [
+const inital_sites: Array<Site> = [
     {
         siteId: 1,
         city: "Reno",
@@ -103,7 +106,7 @@ export type Deployment = {
 
 }
 
-const demployments: Array<Deployment> = [
+const inital_deployments: Array<Deployment> = [
     {
         deploymentId: 0,
 
@@ -177,7 +180,7 @@ const demployments: Array<Deployment> = [
         siteId: 4
     },
     {
-        deploymentId: 6,
+        deploymentId: 8,
 
         corner: 'NW',
         longitude: 39.53507,
@@ -186,7 +189,7 @@ const demployments: Array<Deployment> = [
         siteId: 5
     },
     {
-        deploymentId: 7,
+        deploymentId: 9,
 
         corner: 'SE',
         longitude: 39.534977,
@@ -196,6 +199,15 @@ const demployments: Array<Deployment> = [
     },
 ]
 
+type DeploymentItem = {
+    isSelected: boolean;
+} & Deployment;
+
+type IntersectionItem = {
+    site: Site;
+    deployments: Array<DeploymentItem>
+}
+
 // Make a query for intersections (side_id)
 // Make a query for sensors (deployment_id)
 // OR
@@ -203,35 +215,83 @@ const demployments: Array<Deployment> = [
 
 export default function CapturePage() {
 
+    const handleClick = event => {
 
-    axios.get('http://134.197.75.31:32141/intersections').then(data=>{
-        console.log(data.data)
-    })
+        console.log(event)
+    }
+
+    const [sites, setSites] = useState<Array<Site>>(inital_sites);
+    const [deployments, setDeployments] = useState<Array<Deployment>>(inital_deployments);
+    const [deploymentItems, setDeploymentItems] = useState<Array<DeploymentItem>>(createDeployments)
+    const [intersectionItems, setIntersectionItems] = useState<Array<IntersectionItem>>(createIntersection)
+    function createDeployments() {
+        const deploymentItems: Array<DeploymentItem> = deployments.map(deployment => {
+            return {
+                isSelected: false,
+                ...deployment
+            }
+        })
+
+        return deploymentItems;
+    }
+
+    function createIntersection() {
+
+        return sites.map(site => {
+
+            const filteredDeployments: Array<DeploymentItem> = deploymentItems.filter(deployment => {
+                if (deployment.siteId === site.siteId) {
+                    return deployment;
+                }
+                return;
+            })
+
+            return {
+                site: site,
+                deployments: filteredDeployments
+            }
+
+        })
+
+    }
+
+
+    useEffect(() => {
+
+
+        console.log(deploymentItems)
+        console.log(intersectionItems)
+
+    }, [deploymentItems, intersectionItems])
 
     return (
         <div className='flex flex-col gap-4 xl:flex-row xl:h-full'>
-            <div className='bg-stone-600 h-[650px] w-full rounded-xl md:bg-rose-400 xl:bg-emerald-400 xl:h-full xl:w-2/5'>
-                <MapContainer center={[39.538639, -119.817014]} zoom={18} scrollWheelZoom={false} className='w-full h-full rounded-xl'>
+            <div className='bg-stone-600 h-[400px] w-full rounded-xl md:bg-rose-400 xl:bg-emerald-400 xl:h-full xl:w-2/5'>
+                <MapContainer center={[39.538639, -119.817014]} zoom={18} scrollWheelZoom={false} className='w-full h-full rounded-xl shadow-xl'>
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    { demployments.map(deployment => {
-                        return (
-                            <CircleMarker center={[deployment.longitude, deployment.latitude  ]} radius={7} fill={true} fillOpacity={0.75} fillColor={'#60a5fa'} stroke={true} color={'#2563eb'} />
-                        )
-                    })}
+                    <>
+                        {
+                            intersectionItems ? intersectionItems.map(intersection => {
+                                intersection.deployments.map(deployment => {
+                                        return <CircleMarker eventHandlers={{click: () => console.log(deployment)}} key={deployment.deploymentId} center={[deployment.longitude, deployment.latitude  ]} radius={7} fill={true} fillOpacity={0.75} fillColor={'#60a5fa'} stroke={true} color={'#2563eb'} />
+                                })
+                            }) : undefined
+                        }
+                    </>
                 </MapContainer>
             </div>
             <div className=''>
                 <div className=''>
-                    <p className='text-xl font-semibold text-neutral-400 mb-2'>
+                    <p className='text-xl font-semibold text-black mb-2'>
                         Selected Intersections
                     </p>
-                    <div>
-                        <div className='bg-rose-400 w-3 h-3 flex place-content-center place-items-center rounded'>
-                            <div  className='bg-rose-500 w-3 h-3 animate-ping rounded' />
-                        </div>
+                    <div className='flex flex-col gap-2'>
+                        { deployments.map(deployment => {
+                            return <DeploymentItem key={deployment.deploymentId} selected={true} value={deployment} />
+                        }) }
                     </div>
                 </div>
             </div>
