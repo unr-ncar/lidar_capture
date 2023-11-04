@@ -24,7 +24,7 @@ type NavigationProps = {
 }
 export default function Navigation({className}: NavigationProps) {
     return (
-        <nav className={`${className} flex flex-row items-center p-4 gap-2`}>
+        <nav className={`${className} flex flex-row items-center p-3 gap-2 bg-slate-300 rounded-lg`}>
             <NavigationButton to={'/'} icon={video_camera_icon}>Capture</NavigationButton>
             <NavigationButton to={'/explorer'} icon={arrow_down_on_square}>Explorer</NavigationButton>
             <NavigationButton to={'/settings'} icon={cog_6_tooth}>Settings</NavigationButton>
@@ -40,11 +40,11 @@ function NavigationButton(props: NavigationButtonProps) {
     const {children, icon} = props;
 
     return (
-        <NavLink {...props} className='w-16 h-16 flex flex-col gap-1 items-center justify-center text-white/40 [&>span]:[&.active]:bg-white/30 [&>*]:[&.active]:text-white'>
+        <NavLink {...props} className='w-16 h-16 flex flex-col gap-1 items-center justify-center text-slate-400 [&>span]:[&.active]:bg-slate-400 [&>*]:[&.active]:text-slate-600'>
             <span className='p-2 rounded-xl'>
                 { icon }
             </span>
-            <p className='text-sm leading-tight'>
+            <p className='text-sm font-semibold leading-tight'>
                 {children}
             </p>
         </NavLink>
