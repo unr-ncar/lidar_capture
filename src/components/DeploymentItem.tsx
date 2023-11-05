@@ -1,28 +1,16 @@
-import {Deployment} from "../pages/CapturePage.tsx";
-import {useState} from "react";
+import {Deployment} from "../types.tsx";
 
-type DeploymentItemProps = {
-
-    selected: boolean;
-    value?: Deployment;
-
+export type DeploymentItemProps = {
+    isSelected: boolean;
+    deploymentValue: Deployment;
+    onChangeHandler: (value: Deployment) => void;
 }
-export default function DeploymentItem({selected, value}: DeploymentItemProps) {
 
-    const [toggle, setToggle] = useState<boolean>(false);
-
-    const handleClick = (event) => {
-
-        if (toggle) {
-            setToggle(false)
-        } else {
-            setToggle(true)
-        }
-    }
+export default function DeploymentItem({isSelected, deploymentValue, onChangeHandler}: DeploymentItemProps) {
 
     return (
         <label>
-            <input onChange={handleClick} type='checkbox' className='peer hidden' checked={toggle} defaultChecked={false} />
+            <input onChange={() => onChangeHandler(deploymentValue)} type='checkbox' className='peer hidden' checked={isSelected} />
             <div className='peer-checked:bg-slate-400 '>
                 <p className='font-semibold '>
                     SW
