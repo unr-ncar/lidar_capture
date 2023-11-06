@@ -8,6 +8,10 @@ type Site = {
     primaryStreet: string;
 }
 
+/*type SiteItem = {
+    deployments: Array<DeploymentItem>;
+} & Site;*/
+
 type Deployment = {
     deploymentId: number; // PK
 
@@ -18,5 +22,9 @@ type Deployment = {
     siteId: number; // FK
 
 }
+
+/*type DeploymentItem = {
+    isSelected: boolean;
+} & Deployment;*/
 
 export type { Site, Deployment }

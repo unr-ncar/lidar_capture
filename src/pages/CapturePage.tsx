@@ -1,16 +1,15 @@
 import {MapContainer, TileLayer} from 'react-leaflet'
-import {SiteItem} from "../components/SiteItem.tsx";
 import {useEffect, useState} from "react";
 import {Deployment, Site} from "../types.tsx";
 import axios from "axios";
 import DeploymentItem from "../components/DeploymentItem.tsx";
 import DeploymentMarker from "../components/DeploymentMarker.tsx";
-type DeploymentItem = {
+export type DeploymentItem = {
     isSelected: boolean;
     deploymentValue: Deployment;
 }
 
-type SiteItem = {
+export type SiteItem = {
     deployments?: Array<DeploymentItem>;
 } & Site;
 
@@ -126,15 +125,7 @@ export default function CapturePage() {
                         Selected Intersections
                     </p>
                     <div className='flex flex-col gap-4'>
-                        {
-                            siteItems.map((siteItem: SiteItem) => {
-                                return (
-                                    <div key={siteItem.siteId}>
-                                        <p> {siteItem.siteId} </p>
-                                    </div>
-                                )
-                            })
-                        }
+
                     </div>
                 </div>
             </div>

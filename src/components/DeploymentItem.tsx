@@ -1,9 +1,10 @@
 import {Deployment} from "../types.tsx";
+import {DeploymentItem} from "../pages/CapturePage.tsx";
 
 export type DeploymentItemProps = {
     isSelected: boolean;
     deploymentValue: Deployment;
-    onChangeHandler: (value: Deployment) => void;
+    onChangeHandler: () => void;
 }
 
 export default function DeploymentItem({isSelected, deploymentValue, onChangeHandler}: DeploymentItemProps) {
