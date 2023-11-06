@@ -19,10 +19,10 @@ const cog_6_tooth: JSX.Element = (
     </svg>
 )
 
-type NavigationProps = {
+type NavigationProps_t = {
     className?: string;
 }
-export default function Navigation({className}: NavigationProps) {
+export default function Navigation({className}: NavigationProps_t) {
     return (
         <nav className={`${className} flex flex-row items-center p-3 gap-2 bg-slate-300 rounded-lg`}>
             <NavigationButton to={'/'} icon={video_camera_icon}>Capture</NavigationButton>
@@ -32,10 +32,10 @@ export default function Navigation({className}: NavigationProps) {
     )
 }
 
-type NavigationButtonProps = {
+type NavigationButtonProps_t = {
     children: string; icon: ReactNode;
 } & NavLinkProps;
-function NavigationButton(props: NavigationButtonProps) {
+function NavigationButton(props: NavigationButtonProps_t) {
 
     const {children, icon} = props;
 

@@ -1,5 +1,6 @@
-type Site = {
+type Site_t = {
     siteId: number; // PK
+    ip_address: string;
 
     city: string;
     state: string;
@@ -8,11 +9,11 @@ type Site = {
     primaryStreet: string;
 }
 
-/*type SiteItem = {
-    deployments: Array<DeploymentItem>;
-} & Site;*/
+type SiteItem_t = {
+    deployments: Array<DeploymentItem_t>;
+} & Site_t;
 
-type Deployment = {
+type Deployment_t = {
     deploymentId: number; // PK
 
     corner: 'NW' | 'NE' | 'SW' | 'SE';
@@ -23,8 +24,8 @@ type Deployment = {
 
 }
 
-/*type DeploymentItem = {
+type DeploymentItem_t = {
     isSelected: boolean;
-} & Deployment;*/
+} & Deployment_t;
 
-export type { Site, Deployment }
+export type { Site_t, SiteItem_t, Deployment_t, DeploymentItem_t }
