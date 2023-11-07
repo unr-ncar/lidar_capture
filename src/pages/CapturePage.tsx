@@ -131,7 +131,7 @@ export default function CapturePage() {
                     <p className='text-xl font-semibold text-black mb-2'>
                         Selected Intersections
                     </p>
-                    <div className='flex flex-col gap-4'>
+                    <div className='flex flex-col gap-4 md:grid md:grid-cols-2'>
                         {
                             renderSiteItems()
                         }

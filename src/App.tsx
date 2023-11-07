@@ -6,7 +6,7 @@ import Navigation from "./components/Navigation.tsx";
 function App() {
 
   return (
-      <div className="flex flex-col p-6 gap-6 w-full">
+      <div className="flex flex-col p-10 gap-6 w-full">
           <Navigation className='' />
           <div className='grow'>
               <Outlet />

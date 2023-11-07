@@ -1,6 +1,6 @@
 type Site_t = {
     siteId: number; // PK
-    ip_address: string;
+    ipAddress: string;
 
     city: string;
     state: string;
@@ -22,6 +22,25 @@ type Deployment_t = {
 
     siteId: number; // FK
 
+    status?: DeploymentStatus_t;
+    telemetry?: DeploymentTelemetry_t;
+}
+
+type DeploymentStatus_t = {
+    isRecording: boolean;
+    timeStarted?: string;
+    timeElapsed?: number;
+    files?: Array<DeploymentFile_t>
+}
+
+type DeploymentFile_t = {
+    fileName: string;
+    fileSize: string;
+}
+
+type DeploymentTelemetry_t = {
+    storageSize?: number;
+    storageUsage?: number;
 }
 
 type DeploymentItem_t = {

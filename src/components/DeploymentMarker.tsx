@@ -1,9 +1,13 @@
 import {CircleMarker} from "react-leaflet";
 import {DeploymentItem_t} from "../types.tsx";
 
-export type DeploymentMarkerProps_t = {
-    onClickHandler: () => void;
-} & DeploymentItem_t
+/*const recordingPath = {
+    stroke: true,
+    fill: true,
+    color: '#dc2626',
+    fillColor: '#f87171',
+    fillOpacity: 0.75
+}*/
 
 const selectedPath = {
     stroke: true,
@@ -21,10 +25,12 @@ const unselectedPath = {
     fillOpacity: 0.75
 }
 
+export type DeploymentMarkerProps_t = {
+    onClickHandler: () => void;
+} & DeploymentItem_t
+
 export default function DeploymentMarker({isSelected, latitude, longitude, onClickHandler}: DeploymentMarkerProps_t ) {
 
-    return (
-        <CircleMarker eventHandlers={{click: () => onClickHandler()}} center={[longitude, latitude  ]} radius={7}  pathOptions={isSelected ? selectedPath : unselectedPath} />
-    )
+    return <CircleMarker eventHandlers={{click: () => onClickHandler()}} center={[longitude, latitude  ]} radius={7}  pathOptions={isSelected ? selectedPath : unselectedPath} />
 
 }
