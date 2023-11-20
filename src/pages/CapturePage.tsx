@@ -94,6 +94,15 @@ export default function CapturePage() {
         })
     }
 
+    function renderDeploymentItems() {
+        return siteItems ? siteItems.map((siteItem: SiteItem_t) => {
+            if (deployments)
+                siteItem.deployments.map((deploymentItem: DeploymentItem_t) => {
+                return <DeploymentItem {...deploymentItem} key={deploymentItem.deploymentId} onChangeHandler={() => handleSelection(deploymentItem)} />
+            })
+        }) : <> </>;
+    }
+
     useEffect(() => {
         getDeployments();
         getSites();
@@ -138,82 +147,7 @@ export default function CapturePage() {
                         </p>
                     </div>
                     <div className='flex flex-col'>
-                        <label className='odd:bg-neutral-100 py-4 px-8 bg-blue-100 flex gap-3 place-items-center flex-row justify-between'>
-                            <div className='flex flex-col gap-1'>
-                                <div className='flex flex-row gap-3 place-items-center'>
-                                    <div>
-                                        <ExclamationTriangleIcon className='w-6 h-6 bg-orange-400 p-1 rounded-md text-white' />
-                                    </div>
-                                    <div className='flex flex-col gap-1'>
-                                        <p className='font-semibold text-base leading-tight'>
-                                            Virginia Street &bull; Artemisia Way
-                                        </p>
-                                        <div className='bg-black h-min w-min py-0.5 px-2 rounded'>
-                                            <p className='text-xs text-white text-center font-semibold'>
-                                                SW
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='flex flex-row gap-2 place-items-center'>
-                                <button className='p-2 h-min rounded-full bg-purple-500'>
-                                    <MapPinIcon className='w-5 h-5 text-white/80' />
-                                </button>
-                                <button className='p-2 h-min rounded-full bg-green-500'>
-                                    <InformationCircleIcon className='w-5 h-5 text-white/80' />
-                                </button>
-                            </div>
-                        </label>
-                        <label className='odd:bg-neutral-100 py-4 px-8 flex gap-3 place-items-center flex-row justify-between' >
-                            <div className='flex flex-col gap-1'>
-                                <div className='flex flex-row gap-3 place-items-center'>
-                                    <div>
-                                        <Flag colorClass={'bg-red-400'} iconElement={<VideoCameraIcon />} />
-                                    </div>
-                                    <div className='flex flex-col gap-1'>
-                                        <p className='font-semibold text-base leading-tight'>
-                                            Virginia Street &bull; 5th St.
-                                        </p>
-                                        <Tag>SW</Tag>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='flex flex-row gap-2 place-items-center'>
-
-                                <ItemWidget colorClass='bg-purple-500' iconElement={<MapPinIcon />} />
-                                <button className='p-2 h-min rounded-full bg-green-500'>
-                                    <InformationCircleIcon className='w-5 h-5 text-white/80' />
-                                </button>
-                            </div>
-                        </label>
-                        <label className='peer-disabled:bg-red-100 odd:bg-neutral-100 py-4 px-8 bg-blue-100 flex gap-3 place-items-center flex-row justify-between'>
-                            <div className='flex flex-col gap-1'>
-                                <div className='flex flex-row gap-3 place-items-center'>
-                                    <div>
-                                        <input type='checkbox' defaultChecked={false} className='h-5 w-5 peer rounded-lg'  disabled={false} />
-                                    </div>
-                                    <div className='flex flex-col gap-1'>
-                                        <p className='font-semibold text-base leading-tight'>
-                                            Virginia Street &bull; Artemisia Way
-                                        </p>
-                                        <div className='bg-black h-min w-min py-0.5 px-2 rounded'>
-                                            <p className='text-xs text-white text-center font-semibold'>
-                                                SW
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='flex flex-row gap-2 place-items-center'>
-                                <button className='p-2 h-min rounded-full bg-purple-500'>
-                                    <MapPinIcon className='w-5 h-5 text-white/80' />
-                                </button>
-                                <button className='p-2 h-min rounded-full bg-green-500'>
-                                    <InformationCircleIcon className='w-5 h-5 text-white/80' />
-                                </button>
-                            </div>
-                        </label>
+                        { renderDeploymentItems() }
                     </div>
                 </div>
             </div>

@@ -15,7 +15,7 @@ export default function ItemWidget(props: WidgetProps_t) {
     })
 
     return (
-        <button className={`${colorClass ? colorClass : 'bg-black'} p-2 h-min rounded-full`} {...rest}>
+        <button className={`${colorClass ? colorClass : 'bg-black'} p-2 h-min rounded-lg`} {...rest}>
             { formattedIconElement }
         </button>
     )
