@@ -5,6 +5,7 @@ import DeploymentMarker from "../components/DeploymentMarker.tsx";
 import DeploymentItem from "../components/DeploymentItem.tsx";
 import {NavLink} from "react-router-dom";
 import { useQuery, gql } from '@apollo/client';
+import LoadingWheel from "../components/LoadingWheel.tsx";
 
 export default function CapturePage() {
 
@@ -142,6 +143,17 @@ export default function CapturePage() {
         setSiteItems(siteItems)
     }, [deployments, sites])
 
+    function renderLoading() {
+
+        const elements = []
+
+        for (let i = 0; i < 10; i++) {
+            elements.push(<div key={i} className='odd:bg-neutral-200 w-full h-[76px] odd:animate-pulse'/>)
+        }
+
+        return elements
+    }
+
     return (
         <div className='flex flex-col gap-4'>
             <div className=''>
@@ -158,7 +170,6 @@ export default function CapturePage() {
                         </NavLink>
                     </div>
                     <div className='flex flex-col'>
-                        { renderDeploymentItems() }
                     </div>
                 </div>
             </div>

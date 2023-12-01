@@ -6,8 +6,13 @@ export default {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "background": "url('./assets/background.jpg')"
+      animation: {
+        spin: 'spinner .75s infinite linear'
+      },
+      keyframes: {
+        spinner: {
+          '100%': { transform: 'rotate(360deg)' }
+        }
       }
     },
   },

@@ -48,3 +48,19 @@ type DeploymentItem_t = {
 } & Deployment_t;
 
 export type { Site_t, SiteItem_t, Deployment_t, DeploymentItem_t }
+
+type Site_nt = {
+    siteId: number;
+    ip: string;
+
+    state: string;
+    city: string;
+    street: string;
+    crossStreet: string;
+
+    pcapService?
+}
+
+type LiDAR_nt = {
+    isRecording
+}

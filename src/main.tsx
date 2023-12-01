@@ -9,9 +9,11 @@ import SettingsPage from "./pages/SettingsPage.tsx";
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 const client = new ApolloClient({
-    uri: 'http://134.197.75.31:31538/graphql',
+    uri: import.meta.env.VITE_SERVER,
     cache: new InMemoryCache(),
 });
+
+console.log(import.meta.env.VITE_SERVER)
 
 const router = createBrowserRouter([
     {
