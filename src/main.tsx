@@ -21,27 +21,28 @@ const router = createBrowserRouter([
         children: [
             {
                 element: <CapturePage />,
+                path: "/capture",
                 children: [
                     {
                         index: true,
-                        element: <p>Test</p>
+                        element: <p>Sensors</p>
                     },
                     {
-                        path: 'notifications',
-                        element: <p>Notifications</p>
-                    },
-                    {
-                        path: 'sites',
+                        path: "sites",
                         element: <p>Sites</p>
+                    },
+                    {
+                        path: "create",
+                        element: <p>Create</p>
                     }
                 ]
             },
             {
-                path: 'explorer',
+                path: '/explorer',
                 element: <ExplorerPage />
             },
             {
-                path: 'settings',
+                path: '/settings',
                 element: <SettingsPage />
             }
         ]

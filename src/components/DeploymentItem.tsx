@@ -4,6 +4,8 @@ import {VideoCameraIcon} from "@heroicons/react/20/solid";
 import Tag from "./Tag.tsx";
 import ItemWidget from "./ItemWidget.tsx";
 import {InformationCircleIcon, MapPinIcon} from "@heroicons/react/24/solid";
+import RecordingFlag from "./flags/RecordingFlag.tsx";
+import CriticalDataUsageFlag from "./flags/CriticalDataUsageFlag.tsx";
 
 export type DeploymentItemProps_t = {
     className?: string;
@@ -13,15 +15,17 @@ export type DeploymentItemProps_t = {
 export default function DeploymentItem({ isSelected, deploymentId, corner, latitude, longitude, onChangeHandler, status}: DeploymentItemProps_t) {
 
     function renderStatus() {
+
+
         if (status && status.isRecording) {
-            return  <Flag colorClass={'bg-red-400'} iconElement={<VideoCameraIcon />} />
+            return  <RecordingFlag />
         }
 
         return <input className='w-5 h-5' onChange={onChangeHandler} type='checkbox' checked={isSelected} />
     }
 
     return (
-        <label className='odd:bg-neutral-100 py-4 px-8 flex gap-3 place-items-center flex-row justify-between' >
+        <label className='odd:bg-neutral-100' >
             <div className='flex flex-col gap-1'>
                 <div className='flex flex-row gap-3 place-items-center'>
                     <div>
@@ -29,7 +33,7 @@ export default function DeploymentItem({ isSelected, deploymentId, corner, latit
                     </div>
                     <div className='flex flex-col gap-1'>
                         <p className='font-semibold text-base leading-tight'>
-                            Virginia Street &bull; 5th St.
+                            Virginia Street &bull; Arttemesia Way
                         </p>
                         <Tag label={corner} />
                     </div>

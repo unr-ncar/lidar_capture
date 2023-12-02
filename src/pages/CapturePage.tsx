@@ -3,11 +3,17 @@ import {Deployment_t, DeploymentItem_t, Site_t, SiteItem_t} from "../types.tsx";
 import axios from "axios";
 import DeploymentMarker from "../components/DeploymentMarker.tsx";
 import DeploymentItem from "../components/DeploymentItem.tsx";
-import {NavLink} from "react-router-dom";
+import {NavLink, Outlet, useLocation} from "react-router-dom";
 import { useQuery, gql } from '@apollo/client';
 import LoadingWheel from "../components/LoadingWheel.tsx";
+import {MapContainer, TileLayer} from "react-leaflet";
+import {render} from "react-dom";
+import {ArrowDownOnSquareIcon, FolderArrowDownIcon, VideoCameraIcon} from "@heroicons/react/24/solid";
+import {PlusIcon} from "@heroicons/react/20/solid";
 
 export default function CapturePage() {
+
+    const location = useLocation();
 
     const [sites, setSites] = useState<Array<Site_t>>([])
     const [deployments, setDeployments] = useState<Array<Deployment_t>>([])
@@ -155,21 +161,31 @@ export default function CapturePage() {
     }
 
     return (
-        <div className='flex flex-col gap-4'>
-            <div className=''>
-                <div className='flex flex-col'>
-                    <div className='flex flex-row justify-center items-center gap-3 place-items-center my-5'>
-                        <NavLink to={'/'} className='font-semibold bg-neutral-200 text-neutral-400 px-1.5 py-1 text-sm rounded &:[active]:bg-black'>
-                            Intersections
+        <div className='flex flex-col gap-4 md:h-screen md:max-h-screen md:gap-0 overflow-y-auto'>
+            <div className='hidden md:block md:w-full md:h-3/4 md:rounded-b-full'>
+                <MapContainer center={[39.538639, -119.817014]} zoom={18} scrollWheelZoom={false} zoomControl={false} className='w-full h-full'>
+                    <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                </MapContainer>
+            </div>
+            <div className='p-2'>
+                <div className='flex flex-col gap-2'>
+                    <div className='flex flex-row justify-start items-center gap-2 place-items-center'>
+                        <NavLink to="sites" end={true} className={`font-semibold text-neutral-400 text-xs bg-neutral-200 py-1 px-1.5 rounded [&.active]:text-black`}>
+                            Sites
                         </NavLink>
-                        <NavLink to='sites' className='font-semibold bg-neutral-200 text-neutral-400 px-1.5 py-1 text-sm rounded'>
+                        <NavLink to="/capture" end={true} className='font-semibold text-neutral-400 text-xs bg-neutral-200 py-1 px-1.5 rounded [&.active]:text-black'>
                             Sensors
                         </NavLink>
-                        <NavLink to='notifications' className='font-semibold bg-neutral-200 text-neutral-400 px-1.5 py-1 text-sm rounded'>
-                            Notifications
+                        <NavLink to="create" className='flex flex-row place-items-center gap-1 text-xs bg-black py-1 px-1.5 rounded [&.active]:hidden ml-auto text-white'>
+                            <PlusIcon className='w-4 h-4' />
+                            New Recording
                         </NavLink>
                     </div>
                     <div className='flex flex-col'>
+                        {renderDeploymentItems()}
                     </div>
                 </div>
             </div>
