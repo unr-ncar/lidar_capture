@@ -32,17 +32,22 @@ const router = createBrowserRouter([
                         element: <p>Sites</p>
                     },
                     {
-                        path: "create",
-                        element: <p>Create</p>
+                        path: "start",
+                        element: <p>Start</p>
+                    },
+                    {
+                        path: "stop",
+                        element: <p>Stop</p>
                     }
+
                 ]
             },
             {
-                path: '/explorer',
+                path: "/explorer",
                 element: <ExplorerPage />
             },
             {
-                path: '/settings',
+                path: "/settings",
                 element: <SettingsPage />
             }
         ]

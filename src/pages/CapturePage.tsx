@@ -9,7 +9,7 @@ import LoadingWheel from "../components/LoadingWheel.tsx";
 import {MapContainer, TileLayer} from "react-leaflet";
 import {render} from "react-dom";
 import {ArrowDownOnSquareIcon, FolderArrowDownIcon, VideoCameraIcon} from "@heroicons/react/24/solid";
-import {PlusIcon} from "@heroicons/react/20/solid";
+import {CameraIcon, MinusIcon, PlusIcon, StopIcon} from "@heroicons/react/20/solid";
 
 export default function CapturePage() {
 
@@ -172,17 +172,25 @@ export default function CapturePage() {
             </div>
             <div className='p-2'>
                 <div className='flex flex-col gap-2'>
-                    <div className='flex flex-row justify-start items-center gap-2 place-items-center'>
-                        <NavLink to="sites" end={true} className={`font-semibold text-neutral-400 text-xs bg-neutral-200 py-1 px-1.5 rounded [&.active]:text-black`}>
-                            Sites
-                        </NavLink>
-                        <NavLink to="/capture" end={true} className='font-semibold text-neutral-400 text-xs bg-neutral-200 py-1 px-1.5 rounded [&.active]:text-black'>
-                            Sensors
-                        </NavLink>
-                        <NavLink to="create" className='flex flex-row place-items-center gap-1 text-xs bg-black py-1 px-1.5 rounded [&.active]:hidden ml-auto text-white'>
-                            <PlusIcon className='w-4 h-4' />
-                            New Recording
-                        </NavLink>
+                    <div className='flex flex-row justify-between gap-2 place-items-center'>
+                        <div className='gap-2 flex flex-row'>
+                            <NavLink to="sites" end={true} className={`font-semibold text-neutral-400 text-xs bg-neutral-200 py-1 px-1.5 rounded [&.active]:text-black`}>
+                                Sites
+                            </NavLink>
+                            <NavLink to="/capture" end={true} className='font-semibold text-neutral-400 text-xs bg-neutral-200 py-1 px-1.5 rounded [&.active]:text-black'>
+                                Sensors
+                            </NavLink>
+                        </div>
+                        <div className='gap-2 flex flex-row'>
+                            <NavLink to="stop" className='ml-auto flex flex-row place-items-center gap-1 text-xs bg-red-400 font-semibold py-1 px-1.5 rounded [&.active]:hidden text-white'>
+                                <StopIcon className='w-4 h-4' />
+                                Stop
+                            </NavLink>
+                            <NavLink to="start" className='flex flex-row place-items-center gap-1 text-xs bg-green-400 font-semibold py-1 px-1.5 rounded [&.active]:hidden text-white'>
+                                <VideoCameraIcon className='w-4 h-4' />
+                                Start
+                            </NavLink>
+                        </div>
                     </div>
                     <div className='flex flex-col'>
                         {renderDeploymentItems()}
