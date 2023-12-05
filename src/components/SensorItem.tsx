@@ -1,8 +1,7 @@
 import Tag from "./Tag.tsx";
-import {InformationCircleIcon, MapPinIcon} from "@heroicons/react/20/solid";
-import SensorStatus from "./SensorStatus.tsx";
+import {ExclamationTriangleIcon, InformationCircleIcon, MapPinIcon} from "@heroicons/react/24/solid";
 import ItemButton from "./ItemButton.tsx";
-import {InactiveSensorFlag, OperationalFlag} from "./Flag.tsx";
+import {Link} from "react-router-dom";
 
 export type SensorItemProps_t = {
     className?: string;
@@ -20,11 +19,14 @@ export default function SensorItem({className}: SensorItemProps_t) {
                         Virginia Street &bull; Artemisa Way
                     </p>
                 </div>
-            <SensorStatus flagElement={<InactiveSensorFlag />}>
-                <p className='leading-tight text-sm'>
-                    Unavailable. LiDAR sensor is disabled.
-                </p>
-            </SensorStatus>
+                <div className='flex place-items-center py-3 px-5 gap-3 rounded-md bg-orange-400'>
+                    <span className='text-white'>
+                        <ExclamationTriangleIcon className='w-6 h-6' />
+                    </span>
+                    <p className='leading-tight text-sm text-white'>
+                        <span className='font-semibold'>Critical Capacity: </span>Edge computer is nearing 80% capacity threshold. <Link to={'/'} className='underline decoration-1'>Learn more.</Link>
+                    </p>
+                </div>
             <div className='flex flex-row gap-2 justify-between'>
                 <ItemButton label='Metadata' iconElement={<InformationCircleIcon />} />
                 <ItemButton className='hidden md:flex' label='Locate' iconElement={<MapPinIcon />} />

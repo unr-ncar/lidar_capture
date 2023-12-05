@@ -167,7 +167,7 @@ export default function CapturePage() {
                     />
                 </MapContainer>
             </div>
-            <div className='flex flex-col gap-4 md:w-1/2 md:min-h-max overflow-y-auto'>
+            <div className='flex flex-col gap-4 md:w-1/2 md:min-h-max'>
                     <div className='flex flex-row justify-between gap-2 place-items-center'>
                         <div className='gap-2 flex flex-row'>
                             <NavLink to="sites" end={true} className={`font-semibold text-neutral-400 text-sm bg-neutral-200 py-1 px-1.5 rounded [&.active]:text-black`}>
@@ -188,7 +188,7 @@ export default function CapturePage() {
                             </NavLink>
                         </div>
                     </div>
-                    <div className=''>
+                    <div className='overflow-y-auto no-scrollbar'>
                         <Outlet />
                     </div>
                 </div>

@@ -17,10 +17,12 @@ export default function Flag({className, textColorClass, iconBackgroundColorClas
     });
 
     return (
-        <div className={`${className && className} flex flex-row gap-2 place-items-center`}>
-            {
-                flagElement
-            }
+        <div className={`${className && className} flex flex-row place-items-center gap-2`}>
+            <div>
+                {
+                    flagElement
+                }
+            </div>
             <p className={`${textColorClass} font-semibold text-sm leading-tight`}>
                 { label }
             </p>
