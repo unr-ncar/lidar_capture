@@ -3,10 +3,14 @@ import App from './App.tsx'
 import './index.css'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import React from 'react';
-import CapturePage from "./pages/CapturePage.tsx";
+import CapturePage from "./pages/Capture/CapturePage.tsx";
 import ExplorerPage from "./pages/ExplorerPage.tsx";
 import SettingsPage from "./pages/SettingsPage.tsx";
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import SitesView from "./pages/Capture/SitesView.tsx";
+import SensorsView from "./pages/Capture/SensorsView.tsx";
+import StartCaptureView from "./pages/Capture/StartCaptureView.tsx";
+import StopCaptureView from "./pages/Capture/StopCaptureView.tsx";
 
 const client = new ApolloClient({
     uri: import.meta.env.VITE_SERVER,
@@ -25,21 +29,20 @@ const router = createBrowserRouter([
                 children: [
                     {
                         index: true,
-                        element: <p>Sensors</p>
+                        element: <SensorsView />
                     },
                     {
                         path: "sites",
-                        element: <p>Sites</p>
+                        element: <SitesView />
                     },
                     {
                         path: "start",
-                        element: <p>Start</p>
+                        element: <StartCaptureView />
                     },
                     {
                         path: "stop",
-                        element: <p>Stop</p>
+                        element: <StopCaptureView />
                     }
-
                 ]
             },
             {

@@ -1,15 +1,12 @@
 import {useEffect, useState} from "react";
-import {Deployment_t, DeploymentItem_t, Site_t, SiteItem_t} from "../types.tsx";
+import {Deployment_t, DeploymentItem_t, Site_t, SiteItem_t} from "../../types.tsx";
 import axios from "axios";
-import DeploymentMarker from "../components/DeploymentMarker.tsx";
-import DeploymentItem from "../components/DeploymentItem.tsx";
+import SensorMarker from "../../components/SensorMarker.tsx";
+import SensorItem from "../../components/SensorItem.tsx";
 import {NavLink, Outlet, useLocation} from "react-router-dom";
 import { useQuery, gql } from '@apollo/client';
-import LoadingWheel from "../components/LoadingWheel.tsx";
 import {MapContainer, TileLayer} from "react-leaflet";
-import {render} from "react-dom";
-import {ArrowDownOnSquareIcon, FolderArrowDownIcon, VideoCameraIcon} from "@heroicons/react/24/solid";
-import {CameraIcon, MinusIcon, PlusIcon, StopIcon} from "@heroicons/react/20/solid";
+import {StopIcon, VideoCameraIcon} from "@heroicons/react/20/solid";
 
 export default function CapturePage() {
 
@@ -105,7 +102,7 @@ export default function CapturePage() {
         return siteItems.map((siteItem: SiteItem_t) => {
             if (siteItem.deployments) {
                 return siteItem.deployments.map((deployment: DeploymentItem_t) => {
-                    return <DeploymentMarker {...deployment} key={deployment.deploymentId} isSelected={deployment.isSelected} onClickHandler={() => handleSelection(deployment)} />
+                    return <SensorMarker {...deployment} key={deployment.deploymentId} isSelected={deployment.isSelected} onClickHandler={() => handleSelection(deployment)} />
                 })
             }
         })
@@ -115,7 +112,7 @@ export default function CapturePage() {
         return siteItems.map((siteItem: SiteItem_t) => {
             if (siteItem.deployments) {
                 return siteItem.deployments.map((deployment: DeploymentItem_t) => {
-                    return <DeploymentItem {...deployment} key={deployment.deploymentId} isSelected={deployment.isSelected} onChangeHandler={() => handleSelection(deployment)} />
+                    return <SensorItem {...deployment} key={deployment.deploymentId} isSelected={deployment.isSelected} onChangeHandler={() => handleSelection(deployment)} />
                 })
             }
         })
@@ -161,42 +158,40 @@ export default function CapturePage() {
     }
 
     return (
-        <div className='flex flex-col gap-4 md:h-screen md:max-h-screen md:gap-0 overflow-y-auto'>
-            <div className='hidden md:block md:w-full md:h-3/4 md:rounded-b-full'>
-                <MapContainer center={[39.538639, -119.817014]} zoom={18} scrollWheelZoom={false} zoomControl={false} className='w-full h-full'>
+        <div className='p-4 flex flex-col md:flex-row md:gap-4 md:h-full md:max-h-full'>
+            <div className='hidden md:block md:w-1/2 md:min-h-max'>
+                <MapContainer center={[39.538639, -119.817014]} zoom={18} scrollWheelZoom={false} zoomControl={false} className='w-full h-full rounded-lg'>
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
                 </MapContainer>
             </div>
-            <div className='p-2'>
-                <div className='flex flex-col gap-2'>
+            <div className='flex flex-col gap-4 md:w-1/2 md:min-h-max overflow-y-auto'>
                     <div className='flex flex-row justify-between gap-2 place-items-center'>
                         <div className='gap-2 flex flex-row'>
-                            <NavLink to="sites" end={true} className={`font-semibold text-neutral-400 text-xs bg-neutral-200 py-1 px-1.5 rounded [&.active]:text-black`}>
+                            <NavLink to="sites" end={true} className={`font-semibold text-neutral-400 text-sm bg-neutral-200 py-1 px-1.5 rounded [&.active]:text-black`}>
                                 Sites
                             </NavLink>
-                            <NavLink to="/capture" end={true} className='font-semibold text-neutral-400 text-xs bg-neutral-200 py-1 px-1.5 rounded [&.active]:text-black'>
+                            <NavLink to="/capture" end={true} className='font-semibold text-neutral-400 text-sm bg-neutral-200 py-1 px-1.5 rounded [&.active]:text-black'>
                                 Sensors
                             </NavLink>
                         </div>
                         <div className='gap-2 flex flex-row'>
-                            <NavLink to="stop" className='ml-auto flex flex-row place-items-center gap-1 text-xs bg-red-400 font-semibold py-1 px-1.5 rounded [&.active]:hidden text-white'>
-                                <StopIcon className='w-4 h-4' />
+                            <NavLink to="stop" className='ml-auto flex flex-row place-items-center gap-1 text-sm bg-red-400 font-semibold py-1 px-1.5 rounded [&.active]:hidden text-white'>
+                                <StopIcon className='w-5 h-5' />
                                 Stop
                             </NavLink>
-                            <NavLink to="start" className='flex flex-row place-items-center gap-1 text-xs bg-green-400 font-semibold py-1 px-1.5 rounded [&.active]:hidden text-white'>
-                                <VideoCameraIcon className='w-4 h-4' />
+                            <NavLink to="start" className='flex flex-row place-items-center gap-1 text-sm bg-green-400 font-semibold py-1 px-1.5 rounded [&.active]:hidden text-white'>
+                                <VideoCameraIcon className='w-5 h-5' />
                                 Start
                             </NavLink>
                         </div>
                     </div>
-                    <div className='flex flex-col'>
-                        {renderDeploymentItems()}
+                    <div className=''>
+                        <Outlet />
                     </div>
                 </div>
-            </div>
         </div>
     )
 }

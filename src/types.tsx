@@ -62,5 +62,5 @@ type Site_nt = {
 }
 
 type LiDAR_nt = {
-    isRecording
+    isRecording: boolean;
 }

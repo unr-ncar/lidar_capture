@@ -29,7 +29,7 @@ export type DeploymentMarkerProps_t = {
     onClickHandler: () => void;
 } & DeploymentItem_t
 
-export default function DeploymentMarker({isSelected, latitude, longitude, onClickHandler}: DeploymentMarkerProps_t ) {
+export default function SensorMarker({isSelected, latitude, longitude, onClickHandler}: DeploymentMarkerProps_t ) {
 
     return <CircleMarker eventHandlers={{click: () => onClickHandler()}} center={[longitude, latitude  ]} radius={7}  pathOptions={isSelected ? selectedPath : unselectedPath} />
 
