@@ -188,7 +188,7 @@ export default function CapturePage() {
                             </NavLink>
                         </div>
                     </div>
-                    <div className='overflow-y-auto no-scrollbar'>
+                    <div className='overflow-y-auto'>
                         <Outlet />
                     </div>
                 </div>

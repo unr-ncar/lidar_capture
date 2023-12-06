@@ -1,7 +1,11 @@
+import SensorSelection from "../../components/SensorSelection.tsx";
+
 export default function StartCaptureView() {
     return (
-        <div>
-            StartCaptureView
+        <div className='flex flex-col gap-4'>
+            <SensorSelection />
+            <SensorSelection />
+            <SensorSelection />
         </div>
     )
 }

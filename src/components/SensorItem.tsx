@@ -1,8 +1,7 @@
 import Tag from "./Tag.tsx";
-import {ExclamationTriangleIcon, InformationCircleIcon, MapPinIcon, VideoCameraIcon} from "@heroicons/react/24/solid";
+import { InformationCircleIcon, MapPinIcon} from "@heroicons/react/24/solid";
 import ItemButton from "./ItemButton.tsx";
-import {Link} from "react-router-dom";
-import Status, {RecordingStatus} from "./Status.tsx";
+import {FullDataUsageStatus, RecordingStatus, SensorDisabledStatus} from "./Status.tsx";
 
 export type SensorItemProps_t = {
     className?: string;
@@ -14,13 +13,15 @@ export default function SensorItem({className}: SensorItemProps_t) {
 
     return (
         <div className={`${className} flex flex-col gap-4 bg-neutral-100 p-4 rounded-lg`}>
-                <div className='flex flex-row gap-2'>
-                    <Tag className='' label='SW' />
+                <div className='flex flex-row justify-between'>
                     <p className='flex font-semibold leading-tight'>
                         Virginia Street &bull; Artemisa Way
                     </p>
+                    <Tag className='' label='SW' />
                 </div>
+                <SensorDisabledStatus />
                 <RecordingStatus />
+                <FullDataUsageStatus />
             <div className='flex flex-row gap-2 justify-between'>
                 <ItemButton label='Metadata' iconElement={<InformationCircleIcon />} />
                 <ItemButton className='hidden md:flex' label='Locate' iconElement={<MapPinIcon />} />
