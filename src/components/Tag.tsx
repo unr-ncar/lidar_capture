@@ -1,6 +1,6 @@
 export type TagProps_t = {
     className?: string;
-    label: string;
+    label?: string;
     backgroundColorClass?: string;
     textColorClass?: string;
 }

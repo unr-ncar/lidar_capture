@@ -1,7 +1,8 @@
 import Tag from "./Tag.tsx";
-import {ExclamationTriangleIcon, InformationCircleIcon, MapPinIcon} from "@heroicons/react/24/solid";
+import {ExclamationTriangleIcon, InformationCircleIcon, MapPinIcon, VideoCameraIcon} from "@heroicons/react/24/solid";
 import ItemButton from "./ItemButton.tsx";
 import {Link} from "react-router-dom";
+import Status, {RecordingStatus} from "./Status.tsx";
 
 export type SensorItemProps_t = {
     className?: string;
@@ -19,14 +20,7 @@ export default function SensorItem({className}: SensorItemProps_t) {
                         Virginia Street &bull; Artemisa Way
                     </p>
                 </div>
-                <div className='flex place-items-center py-3 px-5 gap-3 rounded-md bg-orange-400'>
-                    <span className='text-white'>
-                        <ExclamationTriangleIcon className='w-6 h-6' />
-                    </span>
-                    <p className='leading-tight text-sm text-white'>
-                        <span className='font-semibold'>Critical Capacity: </span>Edge computer is nearing 80% capacity threshold. <Link to={'/'} className='underline decoration-1'>Learn more.</Link>
-                    </p>
-                </div>
+                <RecordingStatus />
             <div className='flex flex-row gap-2 justify-between'>
                 <ItemButton label='Metadata' iconElement={<InformationCircleIcon />} />
                 <ItemButton className='hidden md:flex' label='Locate' iconElement={<MapPinIcon />} />
