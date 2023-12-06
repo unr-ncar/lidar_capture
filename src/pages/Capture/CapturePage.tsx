@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-import {Deployment_t, DeploymentItem_t, Site_t, SiteItem_t} from "../../types.tsx";
 import axios from "axios";
 import SensorMarker from "../../components/SensorMarker.tsx";
 import SensorItem from "../../components/SensorItem.tsx";
@@ -168,30 +167,23 @@ export default function CapturePage() {
                 </MapContainer>
             </div>
             <div className='flex flex-col gap-4 md:w-1/2 md:min-h-max'>
-                    <div className='flex flex-row justify-between gap-2 place-items-center'>
-                        <div className='gap-2 flex flex-row'>
-                            <NavLink to="sites" end={true} className={`font-semibold text-neutral-400 text-sm bg-neutral-200 py-1 px-1.5 rounded [&.active]:text-black`}>
-                                Sites
-                            </NavLink>
-                            <NavLink to="/capture" end={true} className='font-semibold text-neutral-400 text-sm bg-neutral-200 py-1 px-1.5 rounded [&.active]:text-black'>
-                                Sensors
-                            </NavLink>
-                        </div>
-                        <div className='gap-2 flex flex-row'>
-                            <NavLink to="stop" className='ml-auto flex flex-row place-items-center gap-1 text-sm bg-red-400 font-semibold py-1 px-1.5 rounded [&.active]:hidden text-white'>
-                                <StopIcon className='w-5 h-5' />
-                                Stop
-                            </NavLink>
-                            <NavLink to="start" className='flex flex-row place-items-center gap-1 text-sm bg-green-400 font-semibold py-1 px-1.5 rounded [&.active]:hidden text-white'>
-                                <VideoCameraIcon className='w-5 h-5' />
-                                Start
-                            </NavLink>
-                        </div>
-                    </div>
-                    <div className='overflow-y-auto'>
-                        <Outlet />
+                <div className='flex flex-row gap-2 justify-between place-items-center'>
+                    <NavLink to="/capture" end={true} className='font-semibold text-neutral-400 text-sm bg-neutral-200 py-1 px-1.5 rounded [&.active]:text-black'>
+                        Sensors
+                    </NavLink>
+                    <div className='flex flex-row gap-2'>
+                        <NavLink to="/capture/stop" className='justify-self-end flex flex-row place-items-center gap-1 text-sm bg-red-400 font-semibold py-1 px-1.5 rounded [&.active]:hidden text-white'>
+                            <StopIcon className='w-5 h-5' /> Stop
+                        </NavLink>
+                        <NavLink to="/capture/start" className='flex flex-row place-items-center gap-1 text-sm bg-green-400 font-semibold py-1 px-1.5 rounded [&.active]:hidden text-white'>
+                            <VideoCameraIcon className='w-5 h-5' /> Start
+                        </NavLink>
                     </div>
                 </div>
+                <div className='overflow-y-auto'>
+                    <Outlet />
+                </div>
+            </div>
         </div>
     )
 }

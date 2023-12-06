@@ -7,17 +7,14 @@ import CapturePage from "./pages/Capture/CapturePage.tsx";
 import ExplorerPage from "./pages/ExplorerPage.tsx";
 import SettingsPage from "./pages/SettingsPage.tsx";
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
-import SitesView from "./pages/Capture/SitesView.tsx";
 import SensorsView from "./pages/Capture/SensorsView.tsx";
 import StartCaptureView from "./pages/Capture/StartCaptureView.tsx";
 import StopCaptureView from "./pages/Capture/StopCaptureView.tsx";
 
 const client = new ApolloClient({
-    uri: import.meta.env.VITE_SERVER,
+    uri: import.meta.env.VITE_GATEWAY_ADDRESS,
     cache: new InMemoryCache(),
 });
-
-console.log(import.meta.env.VITE_SERVER)
 
 const router = createBrowserRouter([
     {
@@ -32,17 +29,22 @@ const router = createBrowserRouter([
                         element: <SensorsView />
                     },
                     {
-                        path: "sites",
-                        element: <SitesView />
-                    },
-                    {
                         path: "start",
                         element: <StartCaptureView />
                     },
                     {
                         path: "stop",
                         element: <StopCaptureView />
+                    },
+                    {
+                        path: "sensor/:lidar_id",
+                        element: <p>Sensor</p>
+                    },
+                    {
+                        path: "site/:site_id",
+                        element: <p>Site</p>
                     }
+
                 ]
             },
             {

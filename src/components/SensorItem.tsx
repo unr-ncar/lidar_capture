@@ -6,7 +6,6 @@ import {FullDataUsageStatus, RecordingStatus, SensorDisabledStatus} from "./Stat
 export type SensorItemProps_t = {
     className?: string;
     lidarId: number;
-
 }
 
 export default function SensorItem({className}: SensorItemProps_t) {
@@ -23,15 +22,12 @@ export default function SensorItem({className}: SensorItemProps_t) {
                 <RecordingStatus />
                 <FullDataUsageStatus />
             <div className='flex flex-row gap-2 justify-between'>
-                <ItemButton label='Metadata' iconElement={<InformationCircleIcon />} />
+                <div className='flex flex-row gap-2'>
+                    <ItemButton label='Sensor' iconElement={<InformationCircleIcon />} />
+                    <ItemButton label='Site' iconElement={<InformationCircleIcon />} />
+                </div>
                 <ItemButton className='hidden md:flex' label='Locate' iconElement={<MapPinIcon />} />
             </div>
         </div>
     )
 }
-
-// <SensorStatus flagElement={<InactiveSensorFlag />} description={'Unavailable. LiDAR sensor is disabled.'} />
-// <SensorStatus flagElement={<InactiveSensorFlag />} description={'Unavailable. LiDAR sensor is disabled.'} />
-// <SensorStatus flagElement={<CriticalDataUsageFlag />} description={'Site machine is above 70% capacity.'} />
-// <SensorStatus flagElement={<FullDataUsageFlag />} description={'Unavailable. Site machine is at full capacity.'} />
-// <SensorStatus flagElement={<RecordingFlag />} description={'Unavailable. Started recording 23 minutes ago on Dec 21st, 2023 at 2:00 p.m. with 20 minutes remaining.'} />

@@ -1,5 +1,4 @@
 import Tag from "./Tag.tsx";
-import {InformationCircleIcon} from "@heroicons/react/24/solid";
 
 export default function SensorSelection() {
     return (
