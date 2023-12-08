@@ -11,8 +11,8 @@ import SensorsView from "./pages/Capture/SensorsView.tsx";
 import StartCaptureView from "./pages/Capture/StartCaptureView.tsx";
 import StopCaptureView from "./pages/Capture/StopCaptureView.tsx";
 
-const client = new ApolloClient({
-    uri: import.meta.env.VITE_GATEWAY_ADDRESS,
+const apolloClient = new ApolloClient({
+    uri: `${import.meta.env.VITE_GATEWAY_ADDRESS}/graphql`,
     cache: new InMemoryCache(),
 });
 
@@ -61,8 +61,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-      <ApolloProvider client={client}>
-        <RouterProvider router={router} />
+      <ApolloProvider client={apolloClient}>
+          <RouterProvider router={router} />
       </ApolloProvider>
   </React.StrictMode>,
 )

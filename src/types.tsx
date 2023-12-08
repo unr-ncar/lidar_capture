@@ -21,6 +21,24 @@ export type Metadata_t = {
         longitude: number;
     }
 }
+
+export type SensorItem_t = {
+    lidarId: number;
+    siteId: number;
+    deploymentId: number;
+    state: string;
+    street: string;
+    crossStreet: string;
+    lidarIp: string;
+    ip: string;
+    latitude: number;
+    longitude: number;
+    intersectionCenter: {
+        latitude: number;
+        longitude: number;
+    }
+}
+
 export type StorageInfoType_t = {
     totalSpace: string;
     usedSpace: string;
@@ -51,14 +69,14 @@ export type RosInfoType_t = {
     corner: string;
 }
 export type StatusInfoType_t = {
-    pcapService: PcapInfoType_t;
-    rosService: RosInfoType_t;
-    ip: string;
+    pcapService?: PcapInfoType_t;
+    rosService?: RosInfoType_t;
+    ip?: string;
     siteId: number;
-    state: string;
-    city: string;
-    street: string;
-    crossStreet: string;
+    state?: string;
+    city?: string;
+    street?: string;
+    crossStreet?: string;
 }
 
 export type Sensor_t = {
@@ -106,6 +124,8 @@ export type Sensor_t = {
         freeSpace: string;
     }
 };
+
+/*
 export type SensorItem_t = {
     crossStreet: string;
     street: string;
@@ -149,3 +169,4 @@ export type SensorSelection_t = {
     isSelected: true;
 } & SensorItem_t;
 
+*/
