@@ -6,7 +6,9 @@ export type ItemButtonProps_t = {
     label: string;
 } &  HTMLAttributes<HTMLButtonElement>;
 
-export default function ItemButton({className, iconElement, label}: ItemButtonProps_t) {
+export default function ItemButton(props: ItemButtonProps_t) {
+
+    const {className, iconElement, label, ...rest} = props;
 
     let icon: ReactElement | null = null;
     const iconClasses: string ='w-4 h-4';
@@ -17,7 +19,7 @@ export default function ItemButton({className, iconElement, label}: ItemButtonPr
     }
 
     return (
-        <button className={`${className} flex flex-row gap-1.5 place-items-center font-semibold text-black text-sm bg-neutral-200 py-1 px-1.5 rounded [&.active]:text-black`}>
+        <button {...rest} className={`${className} flex flex-row gap-1.5 place-items-center font-semibold text-black text-sm bg-neutral-200 py-1 px-1.5 rounded [&.active]:text-black`}>
             { icon && icon }
             <p className='text-sm'>
                 { label }

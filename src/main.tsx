@@ -37,11 +37,11 @@ const router = createBrowserRouter([
                         element: <StopCaptureView />
                     },
                     {
-                        path: "sensor/:lidar_id",
+                        path: "sensor/:lidarId",
                         element: <p>Sensor</p>
                     },
                     {
-                        path: "site/:site_id",
+                        path: "site/:siteId",
                         element: <p>Site</p>
                     }
 
