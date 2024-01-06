@@ -1,14 +1,30 @@
-export type TagProps_t = {
-    className?: string;
-    label?: string;
-    backgroundColorClass?: string;
-    textColorClass?: string;
-}
+import {ReactElement} from "react";
 
-export default function Tag({className, label, backgroundColorClass, textColorClass}: TagProps_t) {
+export interface TagProps_t {
+    iconElement?: ReactElement;
+    label: string;
+    description?: string;
+    backgroundClassName?: string;
+    textClassName?: string;
+    className?: string;
+
+    onClick?: () => void;
+    disabled?: boolean;
+}
+export function Tag({iconElement, label, description, backgroundClassName, textClassName, className, onClick, disabled = false}: TagProps_t) {
     return (
-        <div className={`${className && className} ${backgroundColorClass ? backgroundColorClass : 'bg-black'} h-min w-fit py-0.5 px-2 rounded ${textColorClass ? textColorClass : 'text-white'} text-xs text-center font-semibold`}>
-            { label }
-        </div>
+        <button onClick={onClick} disabled={disabled} className={`${className} ${backgroundClassName}`}>
+            <span className={`${textClassName}`}>
+                { iconElement }
+            </span>
+            <div className={`${textClassName}`}>
+                <p>
+                    { label }
+                </p>
+                <p>
+                    { description }
+                </p>
+            </div>
+        </button>
     )
 }
